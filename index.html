@@ -736,11 +736,42 @@
   let activeCategory = 'all';
   let panelOpen      = false;
 
-  const DEFAULT_CATS = ['rentals', 'learning'];
+  /* ── Built-in links (always present on every device) ── */
+  const BUILTIN_BOOKMARKS = [
+    {"id":1774150192233,"name":"Claude","url":"https://claude.ai/chat","category":"llm","added":"2026-03-22T03:29:52.233Z"},
+    {"id":1774150132283,"name":"Redfin","url":"https://www.redfin.com/rentals/rental-listing-dashboard","category":"rentals","added":"2026-03-22T03:28:52.283Z"},
+    {"id":1774150078251,"name":"Case net","url":"https://www.courts.mo.gov/casenet/nameSearch.do?newSearch=N","category":"rentals","added":"2026-03-22T03:27:58.251Z"},
+    {"id":1774148889909,"name":"Affordable Housing","url":"https://www.affordablehousing.com/","category":"rentals","added":"2026-03-22T03:08:09.909Z"},
+    {"id":1774148844431,"name":"Gmail","url":"https://mail.google.com/mail/u/0/#inbox/WhctKLcDqcgQRdhrqSNHppzlttdtvfxTHRZljPKhVZCbNHnBmGKJlJvpThbHrTNkBZZPScL","category":"e-mail","added":"2026-03-22T03:07:24.431Z"},
+    {"id":1774148783281,"name":"Proton","url":"https://mail.proton.me/u/3/inbox/5u86Me5yktFKjwyyjzLgSagMFU5cU1JJlTC0Z3R--tGYTn_EUbtPp_qgT6yKgEm3UDtqOHJ3wSoAhTRaUryUVQ==","category":"e-mail","added":"2026-03-22T03:06:23.281Z"},
+    {"id":1774148696692,"name":"Google App Script","url":"https://script.google.com/u/0/home/projects/1bUl_1ZCjX17TwnU_4b6p4lHb2OUBYbTIHngdNC1LulOo1yCmmtbCbVHr/edit?pli=1","category":"rentals","added":"2026-03-22T03:04:56.692Z"},
+    {"id":1774148611663,"name":"City of Columbia Utilities","url":"https://myutilitybill.como.gov/ManageAccounts","category":"rentals","added":"2026-03-22T03:03:31.663Z"},
+    {"id":1774148517227,"name":"HAB Habitat Housing Software Solution","url":"https://www.hmsforweb.com/pal/pal_sum_list.php","category":"rentals","added":"2026-03-22T03:01:57.227Z"},
+    {"id":1774148397778,"name":"Tenant e-mail blast","url":"https://docs.google.com/spreadsheets/d/1yk7YZpVozWieV1WG6qFDMY-8UAOy6VU8C23vgK8r_X0/edit?gid=0#gid=0","category":"rentals","added":"2026-03-22T02:59:57.778Z"},
+    {"id":1774148315433,"name":"Ameren","url":"https://www.ameren.com/login-page/auth/error?target=https:%2F%2Fwww2.ameren.com%2Fprot%2Fsilentrenew%2Findex","category":"rentals","added":"2026-03-22T02:58:35.433Z"},
+    {"id":1774148155078,"name":"Chat GPT","url":"https://chatgpt.com/","category":"llm","added":"2026-03-22T02:55:55.078Z"},
+    {"id":1774148100816,"name":"Perplexity","url":"https://www.perplexity.ai/?","category":"llm","added":"2026-03-22T02:55:00.816Z"},
+    {"id":1774147582887,"name":"City Of Columbia","url":"https://energov.como.gov/energov_prod/selfservice#/home","category":"rentals","added":"2026-03-22T02:46:22.887Z"},
+    {"id":1774147398736,"name":"CES","url":"https://cespropertiesinc.portal.agorareal.com/#/login?redirectUrl=%2F","category":"investment","added":"2026-03-22T02:43:18.736Z"},
+    {"id":1774147258338,"name":"Gemini","url":"https://gemini.google.com/app/dd1f8dda7326828c","category":"llm","added":"2026-03-22T02:40:58.338Z"},
+    {"id":1774144370234,"name":"NoteBookLM","url":"https://notebooklm.google.com/","category":"learning","added":"2026-03-22T01:52:50.234Z"},
+    {"id":1774144230656,"name":"Lowe's","url":"https://www.lowes.com/account/profile/wallet/purchase-authorization","category":"rentals","added":"2026-03-22T01:50:30.656Z"},
+    {"id":1774144114086,"name":"Zillow","url":"https://www.zillow.com/rental-manager/properties","category":"rentals","added":"2026-03-22T01:48:34.086Z"},
+    {"id":1773543217240,"name":"Innago","url":"https://identify.innago.com/u/login/identifier?state=hKFo2SBFd3VZWTNBRkloVmgwLTFCajhHbUNSUGZOcmdvTmx1NKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHhmRTc0Y2hiZEwxUG1QYlhPUTNsQUx4RUdHTGRhQVRGo2NpZNkgT2t3d0ZNTnF3TXZUOFJVNmJLNVBTMFBxNUVNZGJlV0E","category":"rentals","added":"2026-03-15T02:53:37.240Z"},
+    {"id":1773543142220,"name":"DigiSigner","url":"https://www.digisigner.com/online","category":"rentals","added":"2026-03-15T02:52:22.220Z"}
+  ];
+
+  const BUILTIN_CATS = ['rentals','learning','llm','investment','airline','e-mail'];
+
+  const BUILTIN_IDS = new Set(BUILTIN_BOOKMARKS.map(b => b.id));
 
   const catColors = {
-    rentals:  '#60c8f0',
-    learning: '#f09060',
+    rentals:    '#60c8f0',
+    learning:   '#f09060',
+    llm:        '#c8f060',
+    investment: '#c060f0',
+    'e-mail':   '#f0c060',
+    airline:    '#60f0c0',
   };
 
   const colorPalette = [
@@ -748,22 +779,45 @@
     '#60f0c0','#f060c0','#f09060','#9060f0','#f06090','#90f060'
   ];
 
-  /* ── Storage ── */
-  function loadBookmarks() {
+  /* ── Storage ── 
+     Built-ins are always shown. localStorage holds user-added links only.
+     Merged view = built-ins first, then user-added on top.
+  ── */
+  function loadUserBookmarks() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
     catch { return []; }
   }
 
-  function saveBookmarks(data) { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); }
+  function saveBookmarks(data) {
+    // Only save non-builtin entries to localStorage
+    const userOnly = data.filter(b => !BUILTIN_IDS.has(b.id));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(userOnly));
+  }
+
+  function loadBookmarks() {
+    const user = loadUserBookmarks();
+    // User-added links first (newest on top), then built-ins
+    return [...user, ...BUILTIN_BOOKMARKS];
+  }
 
   function loadCategories() {
     try {
       const stored = JSON.parse(localStorage.getItem(CAT_KEY));
-      return Array.isArray(stored) ? stored : [...DEFAULT_CATS];
-    } catch { return [...DEFAULT_CATS]; }
+      if (Array.isArray(stored)) {
+        // Merge: built-in cats + any user-added cats, no duplicates
+        const merged = [...BUILTIN_CATS];
+        stored.forEach(c => { if (!merged.includes(c)) merged.push(c); });
+        return merged;
+      }
+      return [...BUILTIN_CATS];
+    } catch { return [...BUILTIN_CATS]; }
   }
 
-  function saveCategories(cats) { localStorage.setItem(CAT_KEY, JSON.stringify(cats)); }
+  function saveCategories(cats) {
+    // Only persist categories that aren't already built-in
+    const userCats = cats.filter(c => !BUILTIN_CATS.includes(c));
+    localStorage.setItem(CAT_KEY, JSON.stringify(userCats));
+  }
 
   function getCatColor(cat) {
     if (catColors[cat]) return catColors[cat];
@@ -823,6 +877,7 @@
   }
 
   function deleteCategory(cat) {
+    if (BUILTIN_CATS.includes(cat)) { showToast('Built-in categories can\'t be removed.'); return; }
     const cats = loadCategories().filter(c => c !== cat);
     saveCategories(cats);
     renderCatDropdown();
@@ -860,6 +915,7 @@
   }
 
   function deleteBookmark(id) {
+    if (BUILTIN_IDS.has(id)) { showToast('Built-in links can\'t be deleted here — edit the HTML file to remove them.'); return; }
     saveBookmarks(loadBookmarks().filter(b => b.id !== id));
     showToast('Page removed.');
     renderAll();
