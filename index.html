@@ -655,8 +655,6 @@
   <header>
     <div class="logo">My <em>Pages</em></div>
     <div class="header-actions">
-      <button class="toggle-btn" onclick="openModal('export')">↓ Export</button>
-      <button class="toggle-btn" onclick="openModal('import')">↑ Import</button>
       <button class="toggle-btn" id="publishBtn" onclick="openModal('publish')" title="Publish to GitHub">⬆ Publish</button>
       <button class="toggle-btn" onclick="openModal('github-settings')" title="GitHub settings">⚙ GitHub</button>
       <button class="toggle-btn" id="toggleBtn" onclick="togglePanel()">
@@ -711,23 +709,6 @@
 
   <!-- Bookmark list -->
   <div class="grid" id="grid"></div>
-</div>
-
-<!-- Export/Import Modal -->
-<div class="modal-backdrop" id="modalBackdrop" onclick="closeModal()"></div>
-<div class="modal" id="modal">
-  <div class="modal-handle"></div>
-  <div class="modal-header">
-    <span class="modal-title" id="modalTitle"></span>
-    <button class="modal-close" onclick="closeModal()">✕</button>
-  </div>
-  <div class="modal-body">
-    <p class="modal-hint" id="modalHint"></p>
-    <textarea class="modal-textarea" id="modalTextarea" spellcheck="false"></textarea>
-  </div>
-  <div class="modal-footer">
-    <button class="add-btn" id="modalActionBtn" onclick="modalAction()"></button>
-  </div>
 </div>
 
 <!-- GitHub Settings Modal -->
@@ -1021,90 +1002,17 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
-  /* ── Export / Import ── */
-  let modalMode = null;
-
+  /* ── Modal router ── */
   function openModal(mode) {
-    modalMode = mode;
-
     if (mode === 'github-settings') { openGhModal(); return; }
-
     if (mode === 'publish') {
       const cfg = loadGhSettings();
       if (!cfg.token || !cfg.user || !cfg.repo || !cfg.file) {
-        showToast('Set up GitHub settings first (⚙ GitHub button).');
+        showToast('Set up GitHub settings first — tap ⚙ GitHub.');
         return;
       }
       publishToGitHub(cfg);
-      return;
     }
-
-    document.getElementById('modalBackdrop').classList.add('open');
-    document.getElementById('modal').classList.add('open');
-
-    const title    = document.getElementById('modalTitle');
-    const hint     = document.getElementById('modalHint');
-    const textarea = document.getElementById('modalTextarea');
-    const btn      = document.getElementById('modalActionBtn');
-
-    if (mode === 'export') {
-      const payload     = { bookmarks: loadBookmarks(), categories: loadCategories() };
-      title.textContent = 'Export';
-      hint.textContent  = 'Copy all the text below, then paste it into the Import box on your other device.';
-      textarea.value    = JSON.stringify(payload);
-      textarea.readOnly = true;
-      btn.textContent   = 'Copy to clipboard';
-      setTimeout(() => { textarea.focus(); textarea.select(); }, 100);
-    } else {
-      title.textContent    = 'Import';
-      hint.textContent     = 'Paste your exported data below, then tap Import. This will replace your current pages and categories.';
-      textarea.value       = '';
-      textarea.readOnly    = false;
-      textarea.placeholder = 'Paste exported data here…';
-      btn.textContent      = 'Import';
-      setTimeout(() => textarea.focus(), 100);
-    }
-  }
-
-  function modalAction() {
-    if (modalMode === 'export') {
-      const text = document.getElementById('modalTextarea').value;
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text)
-          .then(() => showToast('✓ Copied to clipboard!'))
-          .catch(() => fallbackCopy());
-      } else {
-        fallbackCopy();
-      }
-    } else {
-      const text = document.getElementById('modalTextarea').value.trim();
-      if (!text) { showToast('Nothing to import — paste your data first.'); return; }
-      try {
-        const payload = JSON.parse(text);
-        if (payload.bookmarks)  saveBookmarks(payload.bookmarks);
-        if (payload.categories) saveCategories(payload.categories);
-        renderAll();
-        closeModal();
-        showToast(`✓ Imported ${(payload.bookmarks || []).length} pages!`);
-      } catch {
-        showToast('Import failed — invalid data.');
-      }
-    }
-  }
-
-  function fallbackCopy() {
-    const ta = document.getElementById('modalTextarea');
-    ta.readOnly = false;
-    ta.select();
-    try { document.execCommand('copy'); showToast('✓ Copied!'); }
-    catch { showToast('Long-press the text above and choose Copy.'); }
-    ta.readOnly = true;
-  }
-
-  function closeModal() {
-    document.getElementById('modalBackdrop').classList.remove('open');
-    document.getElementById('modal').classList.remove('open');
-    modalMode = null;
   }
 
   /* ── GitHub Settings ── */
