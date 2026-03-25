@@ -657,6 +657,8 @@
     <div class="header-actions">
       <button class="toggle-btn" onclick="openModal('export')">↓ Export</button>
       <button class="toggle-btn" onclick="openModal('import')">↑ Import</button>
+      <button class="toggle-btn" id="publishBtn" onclick="openModal('publish')" title="Publish to GitHub">⬆ Publish</button>
+      <button class="toggle-btn" onclick="openModal('github-settings')" title="GitHub settings">⚙ GitHub</button>
       <button class="toggle-btn" id="toggleBtn" onclick="togglePanel()">
         + Add <span class="arrow">▾</span>
       </button>
@@ -725,6 +727,38 @@
   </div>
   <div class="modal-footer">
     <button class="add-btn" id="modalActionBtn" onclick="modalAction()"></button>
+  </div>
+</div>
+
+<!-- GitHub Settings Modal -->
+<div class="modal-backdrop" id="ghBackdrop" onclick="closeGhModal()"></div>
+<div class="modal" id="ghModal">
+  <div class="modal-handle"></div>
+  <div class="modal-header">
+    <span class="modal-title">GitHub Settings</span>
+    <button class="modal-close" onclick="closeGhModal()">✕</button>
+  </div>
+  <div class="modal-body" style="gap:16px;">
+    <p class="modal-hint">Your token is stored only in this browser — it is never sent anywhere except directly to GitHub's API.</p>
+    <div class="field">
+      <label>Personal Access Token</label>
+      <input type="password" id="ghToken" placeholder="ghp_…" autocorrect="off" autocapitalize="none" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label>GitHub Username</label>
+      <input type="text" id="ghUser" placeholder="e.g. ibnkali" autocorrect="off" autocapitalize="none" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label>Repository name</label>
+      <input type="text" id="ghRepo" placeholder="e.g. my-pages" autocorrect="off" autocapitalize="none" autocomplete="off" />
+    </div>
+    <div class="field">
+      <label>File name in repo</label>
+      <input type="text" id="ghFile" placeholder="index.html" autocorrect="off" autocapitalize="none" autocomplete="off" />
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="add-btn" onclick="saveGhSettings()">Save Settings</button>
   </div>
 </div>
 
@@ -992,6 +1026,19 @@
 
   function openModal(mode) {
     modalMode = mode;
+
+    if (mode === 'github-settings') { openGhModal(); return; }
+
+    if (mode === 'publish') {
+      const cfg = loadGhSettings();
+      if (!cfg.token || !cfg.user || !cfg.repo || !cfg.file) {
+        showToast('Set up GitHub settings first (⚙ GitHub button).');
+        return;
+      }
+      publishToGitHub(cfg);
+      return;
+    }
+
     document.getElementById('modalBackdrop').classList.add('open');
     document.getElementById('modal').classList.add('open');
 
@@ -1058,6 +1105,115 @@
     document.getElementById('modalBackdrop').classList.remove('open');
     document.getElementById('modal').classList.remove('open');
     modalMode = null;
+  }
+
+  /* ── GitHub Settings ── */
+  const GH_KEY = 'mypages_gh';
+
+  function loadGhSettings() {
+    try { return JSON.parse(localStorage.getItem(GH_KEY)) || {}; }
+    catch { return {}; }
+  }
+
+  function openGhModal() {
+    const cfg = loadGhSettings();
+    document.getElementById('ghToken').value = cfg.token || '';
+    document.getElementById('ghUser').value  = cfg.user  || 'ibnkali';
+    document.getElementById('ghRepo').value  = cfg.repo  || 'my-pages';
+    document.getElementById('ghFile').value  = cfg.file  || 'index.html';
+    document.getElementById('ghBackdrop').classList.add('open');
+    document.getElementById('ghModal').classList.add('open');
+  }
+
+  function closeGhModal() {
+    document.getElementById('ghBackdrop').classList.remove('open');
+    document.getElementById('ghModal').classList.remove('open');
+  }
+
+  function saveGhSettings() {
+    const cfg = {
+      token: document.getElementById('ghToken').value.trim(),
+      user:  document.getElementById('ghUser').value.trim(),
+      repo:  document.getElementById('ghRepo').value.trim(),
+      file:  document.getElementById('ghFile').value.trim() || 'index.html',
+    };
+    if (!cfg.token) { showToast('Please enter your token.'); return; }
+    localStorage.setItem(GH_KEY, JSON.stringify(cfg));
+    closeGhModal();
+    showToast('✓ GitHub settings saved!');
+  }
+
+  /* ── Publish to GitHub ── */
+  async function publishToGitHub(cfg) {
+    const btn = document.getElementById('publishBtn');
+    btn.textContent = '⏳ Publishing…';
+    btn.disabled = true;
+
+    try {
+      // 1. Get the current file's SHA (required by GitHub API to update)
+      const apiBase = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.file}`;
+      const headers = {
+        'Authorization': `token ${cfg.token}`,
+        'Accept': 'application/vnd.github+json',
+        'Content-Type': 'application/json',
+      };
+
+      const getRes = await fetch(apiBase, { headers });
+      if (!getRes.ok) throw new Error(`Could not read file: ${getRes.status}`);
+      const getJson = await getRes.json();
+      const sha = getJson.sha;
+
+      // 2. Build the updated HTML with current bookmarks baked in
+      const currentBookmarks  = loadBookmarks();
+      const currentCategories = loadCategories();
+      const updatedHtml = buildUpdatedHtml(currentBookmarks, currentCategories);
+
+      // 3. Push update
+      const content = btoa(unescape(encodeURIComponent(updatedHtml)));
+      const putRes = await fetch(apiBase, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify({
+          message: `Update bookmarks – ${new Date().toLocaleString()}`,
+          content,
+          sha,
+        }),
+      });
+
+      if (!putRes.ok) {
+        const err = await putRes.json();
+        throw new Error(err.message || putRes.status);
+      }
+
+      showToast('✓ Published! Vercel will update in ~30 seconds.');
+    } catch (e) {
+      showToast(`Publish failed: ${e.message}`);
+    } finally {
+      btn.textContent = '⬆ Publish';
+      btn.disabled = false;
+    }
+  }
+
+  function buildUpdatedHtml(bookmarks, categories) {
+    // Get the current page HTML and replace the BUILTIN_BOOKMARKS and BUILTIN_CATS arrays
+    const html = document.documentElement.outerHTML;
+
+    const newBookmarks = JSON.stringify(bookmarks, null, 4)
+      .split('\n').map((l, i) => i === 0 ? l : '  ' + l).join('\n');
+
+    const newCats = JSON.stringify(categories);
+
+    const updated = html
+      .replace(
+        /const BUILTIN_BOOKMARKS = \[[\s\S]*?\];/,
+        `const BUILTIN_BOOKMARKS = ${newBookmarks};`
+      )
+      .replace(
+        /const BUILTIN_CATS = \[.*?\];/,
+        `const BUILTIN_CATS = ${newCats};`
+      );
+
+    return '<!DOCTYPE html>\n' + updated;
   }
 
   function renderAll() {
