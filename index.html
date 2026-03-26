@@ -1058,7 +1058,6 @@
     btn.disabled = true;
 
     try {
-      // 1. Get the current file's SHA (required by GitHub API to update)
       const apiBase = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.file}`;
       const headers = {
         'Authorization': `token ${cfg.token}`,
@@ -1066,31 +1065,27 @@
         'Content-Type': 'application/json',
       };
 
+      // 1. Get current file SHA directly from GitHub (read-only, no CORS issue)
       const getRes = await fetch(apiBase, { headers });
       if (!getRes.ok) throw new Error(`Could not read file: ${getRes.status}`);
       const getJson = await getRes.json();
       const sha = getJson.sha;
 
-      // 2. Build the updated HTML with current bookmarks baked in
-      const currentBookmarks  = loadBookmarks();
-      const currentCategories = loadCategories();
-      const updatedHtml = buildUpdatedHtml(currentBookmarks, currentCategories);
-
-      // 3. Push update
+      // 2. Build updated HTML with current bookmarks baked in
+      const updatedHtml = buildUpdatedHtml(loadBookmarks(), loadCategories());
       const content = btoa(unescape(encodeURIComponent(updatedHtml)));
-      const putRes = await fetch(apiBase, {
-        method: 'PUT',
-        headers,
-        body: JSON.stringify({
-          message: `Update bookmarks – ${new Date().toLocaleString()}`,
-          content,
-          sha,
-        }),
+
+      // 3. Push via our Vercel serverless function (avoids CORS on PUT)
+      const vercelApi = `https://${cfg.repo}.vercel.app/api/publish`;
+      const putRes = await fetch(vercelApi, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: cfg.token, user: cfg.user, repo: cfg.repo, file: cfg.file, content, sha }),
       });
 
       if (!putRes.ok) {
-        const err = await putRes.json();
-        throw new Error(err.message || putRes.status);
+        const err = await putRes.json().catch(() => ({}));
+        throw new Error(err.message || `Server error: ${putRes.status}`);
       }
 
       showToast('✓ Published! Vercel will update in ~30 seconds.');
