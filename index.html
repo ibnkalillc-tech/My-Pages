@@ -596,9 +596,7 @@
     <div class="header-actions">
       <button class="toggle-btn" id="publishBtn" onclick="openModal('publish')" disabled="">⏳ Publishing…</button>
       <button class="toggle-btn" onclick="openModal('github-settings')">⚙ GitHub</button>
-      <button class="toggle-btn" id="toggleBtn" onclick="togglePanel()">
-        + Add <span class="arrow">▾</span>
-      </button>
+      <button class="toggle-btn" id="toggleBtn" onclick="togglePanel()">+ Add <span class="arrow">▾</span></button>
     </div>
   </header>
 
@@ -670,6 +668,10 @@
         All
       </button>
     
+      <button class="tab " onclick="setCategory('learning')">
+        learning
+      </button>
+    
       <button class="tab " onclick="setCategory('llm')">
         llm
       </button>
@@ -685,12 +687,19 @@
       <button class="tab " onclick="setCategory('investment')">
         investment
       </button>
-    
-      <button class="tab " onclick="setCategory('learning')">
-        learning
-      </button>
     </div>
   <div class="grid" id="grid"><div class="card" style="animation-delay:0ms">
+        <div class="card-accent-bar" style="background:#f09060"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=editor.p5js.org" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://editor.p5js.org/" target="_blank" rel="noopener" title="p5.js Game Editor">p5.js Game Editor</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">editor.p5js.org</span>
+        <span class="card-tag" style="color:#f09060">learning</span>
+        <select class="card-cat-select" style="color:#f09060" onchange="updateCategory(1774594197156, this.value)"><option value="rentals">rentals</option><option value="learning" selected="">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774594197156)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:20ms">
         <div class="card-accent-bar" style="background:#c8f060"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=claude.ai" onerror="this.parentElement.textContent='🔗'">
@@ -701,7 +710,7 @@
         <span class="card-tag" style="color:#c8f060">llm</span>
         <select class="card-cat-select" style="color:#c8f060" onchange="updateCategory(1774150192233, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm" selected="">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774150192233)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:20ms">
+      </div><div class="card" style="animation-delay:40ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.redfin.com" onerror="this.parentElement.textContent='🔗'">
@@ -712,7 +721,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774150132283, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774150132283)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:40ms">
+      </div><div class="card" style="animation-delay:60ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.courts.mo.gov" onerror="this.parentElement.textContent='🔗'">
@@ -723,7 +732,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774150078251, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774150078251)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:60ms">
+      </div><div class="card" style="animation-delay:80ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.affordablehousing.com" onerror="this.parentElement.textContent='🔗'">
@@ -734,7 +743,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148889909, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148889909)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:80ms">
+      </div><div class="card" style="animation-delay:100ms">
         <div class="card-accent-bar" style="background:#f0c060"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=mail.google.com" onerror="this.parentElement.textContent='🔗'">
@@ -745,7 +754,7 @@
         <span class="card-tag" style="color:#f0c060">e-mail</span>
         <select class="card-cat-select" style="color:#f0c060" onchange="updateCategory(1774148844431, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail" selected="">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148844431)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:100ms">
+      </div><div class="card" style="animation-delay:120ms">
         <div class="card-accent-bar" style="background:#f0c060"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=mail.proton.me" onerror="this.parentElement.textContent='🔗'">
@@ -756,7 +765,7 @@
         <span class="card-tag" style="color:#f0c060">e-mail</span>
         <select class="card-cat-select" style="color:#f0c060" onchange="updateCategory(1774148783281, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail" selected="">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148783281)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:120ms">
+      </div><div class="card" style="animation-delay:140ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=script.google.com" onerror="this.parentElement.textContent='🔗'">
@@ -767,7 +776,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148696692, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148696692)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:140ms">
+      </div><div class="card" style="animation-delay:160ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=myutilitybill.como.gov" onerror="this.parentElement.textContent='🔗'">
@@ -778,7 +787,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148611663, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148611663)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:160ms">
+      </div><div class="card" style="animation-delay:180ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.hmsforweb.com" onerror="this.parentElement.textContent='🔗'">
@@ -789,7 +798,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148517227, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148517227)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:180ms">
+      </div><div class="card" style="animation-delay:200ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=docs.google.com" onerror="this.parentElement.textContent='🔗'">
@@ -800,7 +809,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148397778, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148397778)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:200ms">
+      </div><div class="card" style="animation-delay:220ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.ameren.com" onerror="this.parentElement.textContent='🔗'">
@@ -811,7 +820,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148315433, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148315433)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:220ms">
+      </div><div class="card" style="animation-delay:240ms">
         <div class="card-accent-bar" style="background:#c8f060"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=chatgpt.com" onerror="this.parentElement.textContent='🔗'">
@@ -822,7 +831,7 @@
         <span class="card-tag" style="color:#c8f060">llm</span>
         <select class="card-cat-select" style="color:#c8f060" onchange="updateCategory(1774148155078, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm" selected="">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148155078)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:240ms">
+      </div><div class="card" style="animation-delay:260ms">
         <div class="card-accent-bar" style="background:#c8f060"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.perplexity.ai" onerror="this.parentElement.textContent='🔗'">
@@ -833,7 +842,7 @@
         <span class="card-tag" style="color:#c8f060">llm</span>
         <select class="card-cat-select" style="color:#c8f060" onchange="updateCategory(1774148100816, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm" selected="">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774148100816)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:260ms">
+      </div><div class="card" style="animation-delay:280ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=energov.como.gov" onerror="this.parentElement.textContent='🔗'">
@@ -844,7 +853,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774147582887, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774147582887)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:280ms">
+      </div><div class="card" style="animation-delay:300ms">
         <div class="card-accent-bar" style="background:#c060f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=cespropertiesinc.portal.agorareal.com" onerror="this.parentElement.textContent='🔗'">
@@ -855,7 +864,7 @@
         <span class="card-tag" style="color:#c060f0">investment</span>
         <select class="card-cat-select" style="color:#c060f0" onchange="updateCategory(1774147398736, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment" selected="">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774147398736)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:300ms">
+      </div><div class="card" style="animation-delay:320ms">
         <div class="card-accent-bar" style="background:#c8f060"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=gemini.google.com" onerror="this.parentElement.textContent='🔗'">
@@ -866,7 +875,7 @@
         <span class="card-tag" style="color:#c8f060">llm</span>
         <select class="card-cat-select" style="color:#c8f060" onchange="updateCategory(1774147258338, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm" selected="">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774147258338)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:320ms">
+      </div><div class="card" style="animation-delay:340ms">
         <div class="card-accent-bar" style="background:#f09060"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=notebooklm.google.com" onerror="this.parentElement.textContent='🔗'">
@@ -877,7 +886,7 @@
         <span class="card-tag" style="color:#f09060">learning</span>
         <select class="card-cat-select" style="color:#f09060" onchange="updateCategory(1774144370234, this.value)"><option value="rentals">rentals</option><option value="learning" selected="">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774144370234)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:340ms">
+      </div><div class="card" style="animation-delay:360ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.lowes.com" onerror="this.parentElement.textContent='🔗'">
@@ -888,7 +897,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774144230656, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774144230656)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:360ms">
+      </div><div class="card" style="animation-delay:380ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.zillow.com" onerror="this.parentElement.textContent='🔗'">
@@ -899,7 +908,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774144114086, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1774144114086)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:380ms">
+      </div><div class="card" style="animation-delay:400ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=identify.innago.com" onerror="this.parentElement.textContent='🔗'">
@@ -910,7 +919,7 @@
         <span class="card-tag" style="color:#60c8f0">rentals</span>
         <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1773543217240, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         <button class="btn-delete" onclick="deleteBookmark(1773543217240)" title="Delete">✕</button>
-      </div><div class="card" style="animation-delay:400ms">
+      </div><div class="card" style="animation-delay:420ms">
         <div class="card-accent-bar" style="background:#60c8f0"></div>
         <div class="card-favicon">
           <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.digisigner.com" onerror="this.parentElement.textContent='🔗'">
@@ -956,7 +965,7 @@
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast">✓ Page added!</div>
 
 <script>
   const STORAGE_KEY  = 'mypages_bookmarks';
@@ -967,6 +976,13 @@
 
   /* ── Built-in links ── */
   const BUILTIN_BOOKMARKS = [
+        {
+            "id": 1774594197156,
+            "name": "p5.js Game Editor",
+            "url": "https://editor.p5js.org/",
+            "category": "learning",
+            "added": "2026-03-27T06:49:57.156Z"
+        },
         {
             "id": 1774150192233,
             "name": "Claude",
