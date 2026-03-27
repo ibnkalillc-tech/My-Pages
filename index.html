@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -8,7 +7,7 @@
 <meta name="apple-mobile-web-app-title" content="My Pages">
 <meta name="theme-color" content="#0e0e10">
 <title>My Pages</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&amp;family=DM+Mono:wght@300;400;500&amp;display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -595,7 +594,7 @@
   <header>
     <div class="logo">My <em>Pages</em></div>
     <div class="header-actions">
-      <button class="toggle-btn" id="publishBtn" onclick="openModal('publish')">⬆ Publish</button>
+      <button class="toggle-btn" id="publishBtn" onclick="openModal('publish')" disabled="">⏳ Publishing…</button>
       <button class="toggle-btn" onclick="openModal('github-settings')">⚙ GitHub</button>
       <button class="toggle-btn" id="toggleBtn" onclick="togglePanel()">
         + Add <span class="arrow">▾</span>
@@ -608,25 +607,52 @@
       <div class="add-form">
         <div class="field">
           <label>Page name</label>
-          <input type="text" id="inputName" placeholder="e.g. Hacker News"
-                 autocorrect="off" autocapitalize="none" autocomplete="off" />
+          <input type="text" id="inputName" placeholder="e.g. Hacker News" autocorrect="off" autocapitalize="none" autocomplete="off">
         </div>
         <div class="field">
           <label>URL</label>
-          <input type="url" id="inputUrl" placeholder="https://…"
-                 inputmode="url" autocorrect="off" autocapitalize="none" autocomplete="off" />
+          <input type="url" id="inputUrl" placeholder="https://…" inputmode="url" autocorrect="off" autocapitalize="none" autocomplete="off">
         </div>
         <div class="field">
           <label>Category</label>
-          <select id="inputCategory"></select>
+          <select id="inputCategory"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
         </div>
         <button class="add-btn" onclick="addBookmark()">+ Add Page</button>
         <div class="cat-manager">
           <div class="cat-manager-title">Manage categories</div>
-          <div class="cat-list" id="catList"></div>
+          <div class="cat-list" id="catList">
+      <div class="cat-pill">
+        <span style="color:#60c8f0">●</span> rentals
+        <button class="cat-pill-del" onclick="deleteCategory('rentals')" title="Remove">✕</button>
+      </div>
+    
+      <div class="cat-pill">
+        <span style="color:#f09060">●</span> learning
+        <button class="cat-pill-del" onclick="deleteCategory('learning')" title="Remove">✕</button>
+      </div>
+    
+      <div class="cat-pill">
+        <span style="color:#c8f060">●</span> llm
+        <button class="cat-pill-del" onclick="deleteCategory('llm')" title="Remove">✕</button>
+      </div>
+    
+      <div class="cat-pill">
+        <span style="color:#c060f0">●</span> investment
+        <button class="cat-pill-del" onclick="deleteCategory('investment')" title="Remove">✕</button>
+      </div>
+    
+      <div class="cat-pill">
+        <span style="color:#60f0c0">●</span> airline
+        <button class="cat-pill-del" onclick="deleteCategory('airline')" title="Remove">✕</button>
+      </div>
+    
+      <div class="cat-pill">
+        <span style="color:#f0c060">●</span> e-mail
+        <button class="cat-pill-del" onclick="deleteCategory('e-mail')" title="Remove">✕</button>
+      </div>
+    </div>
           <div class="cat-add-row">
-            <input type="text" id="newCatInput" placeholder="New category…"
-                   autocorrect="off" autocapitalize="none" />
+            <input type="text" id="newCatInput" placeholder="New category…" autocorrect="off" autocapitalize="none">
             <button class="cat-add-btn" onclick="addCategory()">Add</button>
           </div>
         </div>
@@ -636,12 +662,266 @@
 
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
-    <input type="search" id="searchInput" placeholder="Search pages…"
-           oninput="renderBookmarks()" autocorrect="off" autocapitalize="none" />
+    <input type="search" id="searchInput" placeholder="Search pages…" oninput="renderBookmarks()" autocorrect="off" autocapitalize="none">
   </div>
 
-  <div class="tabs" id="tabsContainer"></div>
-  <div class="grid" id="grid"></div>
+  <div class="tabs" id="tabsContainer">
+      <button class="tab active" onclick="setCategory('all')">
+        All
+      </button>
+    
+      <button class="tab " onclick="setCategory('llm')">
+        llm
+      </button>
+    
+      <button class="tab " onclick="setCategory('rentals')">
+        rentals
+      </button>
+    
+      <button class="tab " onclick="setCategory('e-mail')">
+        e-mail
+      </button>
+    
+      <button class="tab " onclick="setCategory('investment')">
+        investment
+      </button>
+    
+      <button class="tab " onclick="setCategory('learning')">
+        learning
+      </button>
+    </div>
+  <div class="grid" id="grid"><div class="card" style="animation-delay:0ms">
+        <div class="card-accent-bar" style="background:#c8f060"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=claude.ai" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://claude.ai/chat" target="_blank" rel="noopener" title="Claude">Claude</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">claude.ai</span>
+        <span class="card-tag" style="color:#c8f060">llm</span>
+        <select class="card-cat-select" style="color:#c8f060" onchange="updateCategory(1774150192233, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm" selected="">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774150192233)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:20ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.redfin.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.redfin.com/rentals/rental-listing-dashboard" target="_blank" rel="noopener" title="Redfin">Redfin</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.redfin.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774150132283, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774150132283)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:40ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.courts.mo.gov" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.courts.mo.gov/casenet/nameSearch.do?newSearch=N" target="_blank" rel="noopener" title="Case net">Case net</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.courts.mo.gov</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774150078251, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774150078251)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:60ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.affordablehousing.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.affordablehousing.com/" target="_blank" rel="noopener" title="Affordable Housing">Affordable Housing</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.affordablehousing.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148889909, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148889909)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:80ms">
+        <div class="card-accent-bar" style="background:#f0c060"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=mail.google.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://mail.google.com/mail/u/0/#inbox/WhctKLcDqcgQRdhrqSNHppzlttdtvfxTHRZljPKhVZCbNHnBmGKJlJvpThbHrTNkBZZPScL" target="_blank" rel="noopener" title="Gmail">Gmail</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">mail.google.com</span>
+        <span class="card-tag" style="color:#f0c060">e-mail</span>
+        <select class="card-cat-select" style="color:#f0c060" onchange="updateCategory(1774148844431, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail" selected="">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148844431)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:100ms">
+        <div class="card-accent-bar" style="background:#f0c060"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=mail.proton.me" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://mail.proton.me/u/3/inbox/5u86Me5yktFKjwyyjzLgSagMFU5cU1JJlTC0Z3R--tGYTn_EUbtPp_qgT6yKgEm3UDtqOHJ3wSoAhTRaUryUVQ==" target="_blank" rel="noopener" title="Proton">Proton</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">mail.proton.me</span>
+        <span class="card-tag" style="color:#f0c060">e-mail</span>
+        <select class="card-cat-select" style="color:#f0c060" onchange="updateCategory(1774148783281, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail" selected="">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148783281)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:120ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=script.google.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://script.google.com/u/0/home/projects/1bUl_1ZCjX17TwnU_4b6p4lHb2OUBYbTIHngdNC1LulOo1yCmmtbCbVHr/edit?pli=1" target="_blank" rel="noopener" title="Google App Script">Google App Script</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">script.google.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148696692, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148696692)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:140ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=myutilitybill.como.gov" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://myutilitybill.como.gov/ManageAccounts" target="_blank" rel="noopener" title="City of Columbia Utilities">City of Columbia Utilities</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">myutilitybill.como.gov</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148611663, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148611663)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:160ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.hmsforweb.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.hmsforweb.com/pal/pal_sum_list.php" target="_blank" rel="noopener" title="HAB Habitat Housing Software Solution">HAB Habitat Housing Software Solution</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.hmsforweb.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148517227, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148517227)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:180ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=docs.google.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://docs.google.com/spreadsheets/d/1yk7YZpVozWieV1WG6qFDMY-8UAOy6VU8C23vgK8r_X0/edit?gid=0#gid=0" target="_blank" rel="noopener" title="Tenant e-mail blast">Tenant e-mail blast</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">docs.google.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148397778, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148397778)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:200ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.ameren.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.ameren.com/login-page/auth/error?target=https:%2F%2Fwww2.ameren.com%2Fprot%2Fsilentrenew%2Findex" target="_blank" rel="noopener" title="Ameren">Ameren</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.ameren.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774148315433, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148315433)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:220ms">
+        <div class="card-accent-bar" style="background:#c8f060"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=chatgpt.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://chatgpt.com/" target="_blank" rel="noopener" title="Chat GPT">Chat GPT</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">chatgpt.com</span>
+        <span class="card-tag" style="color:#c8f060">llm</span>
+        <select class="card-cat-select" style="color:#c8f060" onchange="updateCategory(1774148155078, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm" selected="">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148155078)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:240ms">
+        <div class="card-accent-bar" style="background:#c8f060"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.perplexity.ai" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.perplexity.ai/?" target="_blank" rel="noopener" title="Perplexity">Perplexity</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.perplexity.ai</span>
+        <span class="card-tag" style="color:#c8f060">llm</span>
+        <select class="card-cat-select" style="color:#c8f060" onchange="updateCategory(1774148100816, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm" selected="">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774148100816)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:260ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=energov.como.gov" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://energov.como.gov/energov_prod/selfservice#/home" target="_blank" rel="noopener" title="City Of Columbia">City Of Columbia</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">energov.como.gov</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774147582887, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774147582887)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:280ms">
+        <div class="card-accent-bar" style="background:#c060f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=cespropertiesinc.portal.agorareal.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://cespropertiesinc.portal.agorareal.com/#/login?redirectUrl=%2F" target="_blank" rel="noopener" title="CES">CES</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">cespropertiesinc.portal.agorareal.com</span>
+        <span class="card-tag" style="color:#c060f0">investment</span>
+        <select class="card-cat-select" style="color:#c060f0" onchange="updateCategory(1774147398736, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment" selected="">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774147398736)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:300ms">
+        <div class="card-accent-bar" style="background:#c8f060"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=gemini.google.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://gemini.google.com/app/dd1f8dda7326828c" target="_blank" rel="noopener" title="Gemini">Gemini</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">gemini.google.com</span>
+        <span class="card-tag" style="color:#c8f060">llm</span>
+        <select class="card-cat-select" style="color:#c8f060" onchange="updateCategory(1774147258338, this.value)"><option value="rentals">rentals</option><option value="learning">learning</option><option value="llm" selected="">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774147258338)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:320ms">
+        <div class="card-accent-bar" style="background:#f09060"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=notebooklm.google.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://notebooklm.google.com/" target="_blank" rel="noopener" title="NoteBookLM">NoteBookLM</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">notebooklm.google.com</span>
+        <span class="card-tag" style="color:#f09060">learning</span>
+        <select class="card-cat-select" style="color:#f09060" onchange="updateCategory(1774144370234, this.value)"><option value="rentals">rentals</option><option value="learning" selected="">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774144370234)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:340ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.lowes.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.lowes.com/account/profile/wallet/purchase-authorization" target="_blank" rel="noopener" title="Lowe's">Lowe's</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.lowes.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774144230656, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774144230656)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:360ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.zillow.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.zillow.com/rental-manager/properties" target="_blank" rel="noopener" title="Zillow">Zillow</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.zillow.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1774144114086, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1774144114086)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:380ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=identify.innago.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://identify.innago.com/u/login/identifier?state=hKFo2SBFd3VZWTNBRkloVmgwLTFCajhHbUNSUGZOcmdvTmx1NKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHhmRTc0Y2hiZEwxUG1QYlhPUTNsQUx4RUdHTGRhQVRGo2NpZNkgT2t3d0ZNTnF3TXZUOFJVNmJLNVBTMFBxNUVNZGJlV0E" target="_blank" rel="noopener" title="Innago">Innago</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">identify.innago.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1773543217240, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1773543217240)" title="Delete">✕</button>
+      </div><div class="card" style="animation-delay:400ms">
+        <div class="card-accent-bar" style="background:#60c8f0"></div>
+        <div class="card-favicon">
+          <img src="https://www.google.com/s2/favicons?sz=32&amp;domain=www.digisigner.com" onerror="this.parentElement.textContent='🔗'">
+        </div>
+        <a class="card-title" href="https://www.digisigner.com/online" target="_blank" rel="noopener" title="DigiSigner">DigiSigner</a>
+        <span class="card-sep">·</span>
+        <span class="card-url">www.digisigner.com</span>
+        <span class="card-tag" style="color:#60c8f0">rentals</span>
+        <select class="card-cat-select" style="color:#60c8f0" onchange="updateCategory(1773543142220, this.value)"><option value="rentals" selected="">rentals</option><option value="learning">learning</option><option value="llm">llm</option><option value="investment">investment</option><option value="airline">airline</option><option value="e-mail">e-mail</option></select>
+        <button class="btn-delete" onclick="deleteBookmark(1773543142220)" title="Delete">✕</button>
+      </div></div>
 </div>
 
 <!-- GitHub Settings Modal -->
@@ -656,20 +936,19 @@
     <p class="modal-hint">Your token is stored only in this browser — never sent anywhere except directly to GitHub's API.</p>
     <div class="field">
       <label>Personal Access Token</label>
-      <input type="password" id="ghToken" placeholder="ghp_…"
-             autocorrect="off" autocapitalize="none" autocomplete="off" />
+      <input type="password" id="ghToken" placeholder="ghp_…" autocorrect="off" autocapitalize="none" autocomplete="off">
     </div>
     <div class="field">
       <label>GitHub Username</label>
-      <input type="text" id="ghUser" autocorrect="off" autocapitalize="none" autocomplete="off" />
+      <input type="text" id="ghUser" autocorrect="off" autocapitalize="none" autocomplete="off">
     </div>
     <div class="field">
       <label>Repository name</label>
-      <input type="text" id="ghRepo" autocorrect="off" autocapitalize="none" autocomplete="off" />
+      <input type="text" id="ghRepo" autocorrect="off" autocapitalize="none" autocomplete="off">
     </div>
     <div class="field">
       <label>File name in repo</label>
-      <input type="text" id="ghFile" autocorrect="off" autocapitalize="none" autocomplete="off" />
+      <input type="text" id="ghFile" autocorrect="off" autocapitalize="none" autocomplete="off">
     </div>
   </div>
   <div class="modal-footer">
@@ -688,30 +967,156 @@
 
   /* ── Built-in links ── */
   const BUILTIN_BOOKMARKS = [
-    {"id":1774150192233,"name":"Claude","url":"https://claude.ai/chat","category":"llm","added":"2026-03-22T03:29:52.233Z"},
-    {"id":1774150132283,"name":"Redfin","url":"https://www.redfin.com/rentals/rental-listing-dashboard","category":"rentals","added":"2026-03-22T03:28:52.283Z"},
-    {"id":1774150078251,"name":"Case net","url":"https://www.courts.mo.gov/casenet/nameSearch.do?newSearch=N","category":"rentals","added":"2026-03-22T03:27:58.251Z"},
-    {"id":1774148889909,"name":"Affordable Housing","url":"https://www.affordablehousing.com/","category":"rentals","added":"2026-03-22T03:08:09.909Z"},
-    {"id":1774148844431,"name":"Gmail","url":"https://mail.google.com/mail/u/0/#inbox/WhctKLcDqcgQRdhrqSNHppzlttdtvfxTHRZljPKhVZCbNHnBmGKJlJvpThbHrTNkBZZPScL","category":"e-mail","added":"2026-03-22T03:07:24.431Z"},
-    {"id":1774148783281,"name":"Proton","url":"https://mail.proton.me/u/3/inbox/5u86Me5yktFKjwyyjzLgSagMFU5cU1JJlTC0Z3R--tGYTn_EUbtPp_qgT6yKgEm3UDtqOHJ3wSoAhTRaUryUVQ==","category":"e-mail","added":"2026-03-22T03:06:23.281Z"},
-    {"id":1774148696692,"name":"Google App Script","url":"https://script.google.com/u/0/home/projects/1bUl_1ZCjX17TwnU_4b6p4lHb2OUBYbTIHngdNC1LulOo1yCmmtbCbVHr/edit?pli=1","category":"rentals","added":"2026-03-22T03:04:56.692Z"},
-    {"id":1774148611663,"name":"City of Columbia Utilities","url":"https://myutilitybill.como.gov/ManageAccounts","category":"rentals","added":"2026-03-22T03:03:31.663Z"},
-    {"id":1774148517227,"name":"HAB Habitat Housing Software Solution","url":"https://www.hmsforweb.com/pal/pal_sum_list.php","category":"rentals","added":"2026-03-22T03:01:57.227Z"},
-    {"id":1774148397778,"name":"Tenant e-mail blast","url":"https://docs.google.com/spreadsheets/d/1yk7YZpVozWieV1WG6qFDMY-8UAOy6VU8C23vgK8r_X0/edit?gid=0#gid=0","category":"rentals","added":"2026-03-22T02:59:57.778Z"},
-    {"id":1774148315433,"name":"Ameren","url":"https://www.ameren.com/login-page/auth/error?target=https:%2F%2Fwww2.ameren.com%2Fprot%2Fsilentrenew%2Findex","category":"rentals","added":"2026-03-22T02:58:35.433Z"},
-    {"id":1774148155078,"name":"Chat GPT","url":"https://chatgpt.com/","category":"llm","added":"2026-03-22T02:55:55.078Z"},
-    {"id":1774148100816,"name":"Perplexity","url":"https://www.perplexity.ai/?","category":"llm","added":"2026-03-22T02:55:00.816Z"},
-    {"id":1774147582887,"name":"City Of Columbia","url":"https://energov.como.gov/energov_prod/selfservice#/home","category":"rentals","added":"2026-03-22T02:46:22.887Z"},
-    {"id":1774147398736,"name":"CES","url":"https://cespropertiesinc.portal.agorareal.com/#/login?redirectUrl=%2F","category":"investment","added":"2026-03-22T02:43:18.736Z"},
-    {"id":1774147258338,"name":"Gemini","url":"https://gemini.google.com/app/dd1f8dda7326828c","category":"llm","added":"2026-03-22T02:40:58.338Z"},
-    {"id":1774144370234,"name":"NoteBookLM","url":"https://notebooklm.google.com/","category":"learning","added":"2026-03-22T01:52:50.234Z"},
-    {"id":1774144230656,"name":"Lowe's","url":"https://www.lowes.com/account/profile/wallet/purchase-authorization","category":"rentals","added":"2026-03-22T01:50:30.656Z"},
-    {"id":1774144114086,"name":"Zillow","url":"https://www.zillow.com/rental-manager/properties","category":"rentals","added":"2026-03-22T01:48:34.086Z"},
-    {"id":1773543217240,"name":"Innago","url":"https://identify.innago.com/u/login/identifier?state=hKFo2SBFd3VZWTNBRkloVmgwLTFCajhHbUNSUGZOcmdvTmx1NKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHhmRTc0Y2hiZEwxUG1QYlhPUTNsQUx4RUdHTGRhQVRGo2NpZNkgT2t3d0ZNTnF3TXZUOFJVNmJLNVBTMFBxNUVNZGJlV0E","category":"rentals","added":"2026-03-15T02:53:37.240Z"},
-    {"id":1773543142220,"name":"DigiSigner","url":"https://www.digisigner.com/online","category":"rentals","added":"2026-03-15T02:52:22.220Z"}
-  ];
+        {
+            "id": 1774150192233,
+            "name": "Claude",
+            "url": "https://claude.ai/chat",
+            "category": "llm",
+            "added": "2026-03-22T03:29:52.233Z"
+        },
+        {
+            "id": 1774150132283,
+            "name": "Redfin",
+            "url": "https://www.redfin.com/rentals/rental-listing-dashboard",
+            "category": "rentals",
+            "added": "2026-03-22T03:28:52.283Z"
+        },
+        {
+            "id": 1774150078251,
+            "name": "Case net",
+            "url": "https://www.courts.mo.gov/casenet/nameSearch.do?newSearch=N",
+            "category": "rentals",
+            "added": "2026-03-22T03:27:58.251Z"
+        },
+        {
+            "id": 1774148889909,
+            "name": "Affordable Housing",
+            "url": "https://www.affordablehousing.com/",
+            "category": "rentals",
+            "added": "2026-03-22T03:08:09.909Z"
+        },
+        {
+            "id": 1774148844431,
+            "name": "Gmail",
+            "url": "https://mail.google.com/mail/u/0/#inbox/WhctKLcDqcgQRdhrqSNHppzlttdtvfxTHRZljPKhVZCbNHnBmGKJlJvpThbHrTNkBZZPScL",
+            "category": "e-mail",
+            "added": "2026-03-22T03:07:24.431Z"
+        },
+        {
+            "id": 1774148783281,
+            "name": "Proton",
+            "url": "https://mail.proton.me/u/3/inbox/5u86Me5yktFKjwyyjzLgSagMFU5cU1JJlTC0Z3R--tGYTn_EUbtPp_qgT6yKgEm3UDtqOHJ3wSoAhTRaUryUVQ==",
+            "category": "e-mail",
+            "added": "2026-03-22T03:06:23.281Z"
+        },
+        {
+            "id": 1774148696692,
+            "name": "Google App Script",
+            "url": "https://script.google.com/u/0/home/projects/1bUl_1ZCjX17TwnU_4b6p4lHb2OUBYbTIHngdNC1LulOo1yCmmtbCbVHr/edit?pli=1",
+            "category": "rentals",
+            "added": "2026-03-22T03:04:56.692Z"
+        },
+        {
+            "id": 1774148611663,
+            "name": "City of Columbia Utilities",
+            "url": "https://myutilitybill.como.gov/ManageAccounts",
+            "category": "rentals",
+            "added": "2026-03-22T03:03:31.663Z"
+        },
+        {
+            "id": 1774148517227,
+            "name": "HAB Habitat Housing Software Solution",
+            "url": "https://www.hmsforweb.com/pal/pal_sum_list.php",
+            "category": "rentals",
+            "added": "2026-03-22T03:01:57.227Z"
+        },
+        {
+            "id": 1774148397778,
+            "name": "Tenant e-mail blast",
+            "url": "https://docs.google.com/spreadsheets/d/1yk7YZpVozWieV1WG6qFDMY-8UAOy6VU8C23vgK8r_X0/edit?gid=0#gid=0",
+            "category": "rentals",
+            "added": "2026-03-22T02:59:57.778Z"
+        },
+        {
+            "id": 1774148315433,
+            "name": "Ameren",
+            "url": "https://www.ameren.com/login-page/auth/error?target=https:%2F%2Fwww2.ameren.com%2Fprot%2Fsilentrenew%2Findex",
+            "category": "rentals",
+            "added": "2026-03-22T02:58:35.433Z"
+        },
+        {
+            "id": 1774148155078,
+            "name": "Chat GPT",
+            "url": "https://chatgpt.com/",
+            "category": "llm",
+            "added": "2026-03-22T02:55:55.078Z"
+        },
+        {
+            "id": 1774148100816,
+            "name": "Perplexity",
+            "url": "https://www.perplexity.ai/?",
+            "category": "llm",
+            "added": "2026-03-22T02:55:00.816Z"
+        },
+        {
+            "id": 1774147582887,
+            "name": "City Of Columbia",
+            "url": "https://energov.como.gov/energov_prod/selfservice#/home",
+            "category": "rentals",
+            "added": "2026-03-22T02:46:22.887Z"
+        },
+        {
+            "id": 1774147398736,
+            "name": "CES",
+            "url": "https://cespropertiesinc.portal.agorareal.com/#/login?redirectUrl=%2F",
+            "category": "investment",
+            "added": "2026-03-22T02:43:18.736Z"
+        },
+        {
+            "id": 1774147258338,
+            "name": "Gemini",
+            "url": "https://gemini.google.com/app/dd1f8dda7326828c",
+            "category": "llm",
+            "added": "2026-03-22T02:40:58.338Z"
+        },
+        {
+            "id": 1774144370234,
+            "name": "NoteBookLM",
+            "url": "https://notebooklm.google.com/",
+            "category": "learning",
+            "added": "2026-03-22T01:52:50.234Z"
+        },
+        {
+            "id": 1774144230656,
+            "name": "Lowe's",
+            "url": "https://www.lowes.com/account/profile/wallet/purchase-authorization",
+            "category": "rentals",
+            "added": "2026-03-22T01:50:30.656Z"
+        },
+        {
+            "id": 1774144114086,
+            "name": "Zillow",
+            "url": "https://www.zillow.com/rental-manager/properties",
+            "category": "rentals",
+            "added": "2026-03-22T01:48:34.086Z"
+        },
+        {
+            "id": 1773543217240,
+            "name": "Innago",
+            "url": "https://identify.innago.com/u/login/identifier?state=hKFo2SBFd3VZWTNBRkloVmgwLTFCajhHbUNSUGZOcmdvTmx1NKFur3VuaXZlcnNhbC1sb2dpbqN0aWTZIHhmRTc0Y2hiZEwxUG1QYlhPUTNsQUx4RUdHTGRhQVRGo2NpZNkgT2t3d0ZNTnF3TXZUOFJVNmJLNVBTMFBxNUVNZGJlV0E",
+            "category": "rentals",
+            "added": "2026-03-15T02:53:37.240Z"
+        },
+        {
+            "id": 1773543142220,
+            "name": "DigiSigner",
+            "url": "https://www.digisigner.com/online",
+            "category": "rentals",
+            "added": "2026-03-15T02:52:22.220Z"
+        }
+    ];
 
-  const BUILTIN_CATS = ['rentals','learning','llm','investment','airline','e-mail'];
+  const BUILTIN_CATS = ["rentals","learning","llm","investment","airline","e-mail"];
   const BUILTIN_IDS  = new Set(BUILTIN_BOOKMARKS.map(b => b.id));
 
   const catColors = {
@@ -1036,5 +1441,6 @@
 
   renderAll();
 </script>
-</body>
-</html>
+
+
+</body></html>
