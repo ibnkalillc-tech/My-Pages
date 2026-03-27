@@ -58,7 +58,6 @@
     padding: calc(var(--safe-top) + 24px) calc(var(--safe-right) + 20px) calc(var(--safe-bottom) + 40px) calc(var(--safe-left) + 20px);
   }
 
-  /* ── Header ── */
   header {
     margin-bottom: 28px;
     display: flex;
@@ -85,7 +84,6 @@
     flex-wrap: wrap;
   }
 
-  /* ── Buttons ── */
   .toggle-btn {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -128,7 +126,6 @@
 
   .add-btn:active { opacity: 0.75; }
 
-  /* ── Collapsible panel ── */
   .panel-wrap {
     display: grid;
     grid-template-rows: 0fr;
@@ -139,7 +136,6 @@
   .panel-wrap.open { grid-template-rows: 1fr; }
   .panel-inner { overflow: hidden; }
 
-  /* ── Add form ── */
   .add-form {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -186,11 +182,7 @@
   .field input::placeholder { color: var(--muted); }
   .field select option { background: var(--surface2); }
 
-  /* ── Category manager ── */
-  .cat-manager {
-    border-top: 1px solid var(--border);
-    padding-top: 16px;
-  }
+  .cat-manager { border-top: 1px solid var(--border); padding-top: 16px; }
 
   .cat-manager-title {
     font-size: 11px;
@@ -200,12 +192,7 @@
     margin-bottom: 10px;
   }
 
-  .cat-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
+  .cat-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 
   .cat-pill {
     display: flex;
@@ -234,7 +221,6 @@
   }
 
   .cat-pill-del:active { color: var(--danger); }
-
   .cat-add-row { display: flex; gap: 8px; }
 
   .cat-add-row input {
@@ -268,11 +254,7 @@
 
   .cat-add-btn:active { opacity: 0.7; }
 
-  /* ── Search ── */
-  .search-wrap {
-    position: relative;
-    margin-bottom: 20px;
-  }
+  .search-wrap { position: relative; margin-bottom: 20px; }
 
   .search-wrap input {
     width: 100%;
@@ -301,7 +283,6 @@
     font-size: 18px;
   }
 
-  /* ── Category tabs — horizontally scrollable ── */
   .tabs {
     display: flex;
     gap: 8px;
@@ -333,20 +314,9 @@
   }
 
   .tab:active { opacity: 0.7; }
+  .tab.active { background: var(--accent); border-color: var(--accent); color: #0e0e10; font-weight: 500; }
 
-  .tab.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #0e0e10;
-    font-weight: 500;
-  }
-
-  /* ── Bookmark list ── */
-  .grid {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  .grid { display: flex; flex-direction: column; gap: 6px; }
 
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(8px); }
@@ -404,7 +374,6 @@
   }
 
   .card-title:active { color: var(--accent); }
-
   .card-sep { color: var(--border); font-size: 11px; flex-shrink: 0; }
 
   .card-url {
@@ -417,7 +386,6 @@
     min-width: 0;
   }
 
-  /* Category: static tag on desktop (hover reveals select), always select on mobile */
   .card-tag {
     font-size: 10px;
     letter-spacing: 0.07em;
@@ -457,7 +425,6 @@
     .card-cat-select { display: block; }
   }
 
-  /* Delete button */
   .btn-delete {
     background: transparent;
     border: none;
@@ -481,18 +448,11 @@
 
   .btn-delete:active { background: var(--danger); color: white; opacity: 1 !important; }
 
-  /* ── Empty ── */
-  .empty {
-    padding: 64px 0;
-    text-align: center;
-    color: var(--muted);
-  }
-
+  .empty { padding: 64px 0; text-align: center; color: var(--muted); }
   .empty-icon { font-size: 40px; margin-bottom: 16px; }
   .empty-title { font-family: 'DM Serif Display', serif; font-size: 22px; color: var(--text); margin-bottom: 6px; }
   .empty-sub { font-size: 13px; }
 
-  /* ── Modal — slides up from bottom on mobile ── */
   .modal-backdrop {
     display: none;
     position: fixed;
@@ -537,7 +497,7 @@
 
   @keyframes slideUp {
     from { transform: translateY(30px); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
+    to   { transform: translateY(0); opacity: 1; }
   }
 
   @media (min-width: 600px) {
@@ -547,7 +507,6 @@
     }
   }
 
-  /* Drag handle — mobile only */
   .modal-handle {
     width: 40px;
     height: 4px;
@@ -603,31 +562,12 @@
 
   .modal-hint { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-  .modal-textarea {
-    width: 100%;
-    height: 160px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    color: var(--text);
-    font-family: 'DM Mono', monospace;
-    font-size: 13px;
-    padding: 12px 14px;
-    resize: none;
-    outline: none;
-    -webkit-appearance: none;
-    line-height: 1.5;
-  }
-
-  .modal-textarea:focus { border-color: var(--accent2); }
-
   .modal-footer {
     padding: 12px 20px 16px;
     flex-shrink: 0;
     border-top: 1px solid var(--border);
   }
 
-  /* ── Toast — centered bottom ── */
   .toast {
     position: fixed;
     bottom: calc(var(--safe-bottom) + 28px);
@@ -655,15 +595,14 @@
   <header>
     <div class="logo">My <em>Pages</em></div>
     <div class="header-actions">
-      <button class="toggle-btn" id="publishBtn" onclick="openModal('publish')" title="Publish to GitHub">⬆ Publish</button>
-      <button class="toggle-btn" onclick="openModal('github-settings')" title="GitHub settings">⚙ GitHub</button>
+      <button class="toggle-btn" id="publishBtn" onclick="openModal('publish')">⬆ Publish</button>
+      <button class="toggle-btn" onclick="openModal('github-settings')">⚙ GitHub</button>
       <button class="toggle-btn" id="toggleBtn" onclick="togglePanel()">
         + Add <span class="arrow">▾</span>
       </button>
     </div>
   </header>
 
-  <!-- Collapsible add panel -->
   <div class="panel-wrap" id="panelWrap">
     <div class="panel-inner">
       <div class="add-form">
@@ -682,8 +621,6 @@
           <select id="inputCategory"></select>
         </div>
         <button class="add-btn" onclick="addBookmark()">+ Add Page</button>
-
-        <!-- Category manager -->
         <div class="cat-manager">
           <div class="cat-manager-title">Manage categories</div>
           <div class="cat-list" id="catList"></div>
@@ -697,17 +634,13 @@
     </div>
   </div>
 
-  <!-- Search -->
   <div class="search-wrap">
     <span class="search-icon">⌕</span>
     <input type="search" id="searchInput" placeholder="Search pages…"
            oninput="renderBookmarks()" autocorrect="off" autocapitalize="none" />
   </div>
 
-  <!-- Category tabs -->
   <div class="tabs" id="tabsContainer"></div>
-
-  <!-- Bookmark list -->
   <div class="grid" id="grid"></div>
 </div>
 
@@ -720,22 +653,23 @@
     <button class="modal-close" onclick="closeGhModal()">✕</button>
   </div>
   <div class="modal-body" style="gap:16px;">
-    <p class="modal-hint">Your token is stored only in this browser — it is never sent anywhere except directly to GitHub's API.</p>
+    <p class="modal-hint">Your token is stored only in this browser — never sent anywhere except directly to GitHub's API.</p>
     <div class="field">
       <label>Personal Access Token</label>
-      <input type="password" id="ghToken" placeholder="ghp_…" autocorrect="off" autocapitalize="none" autocomplete="off" />
+      <input type="password" id="ghToken" placeholder="ghp_…"
+             autocorrect="off" autocapitalize="none" autocomplete="off" />
     </div>
     <div class="field">
       <label>GitHub Username</label>
-      <input type="text" id="ghUser" placeholder="e.g. ibnkali" autocorrect="off" autocapitalize="none" autocomplete="off" />
+      <input type="text" id="ghUser" autocorrect="off" autocapitalize="none" autocomplete="off" />
     </div>
     <div class="field">
       <label>Repository name</label>
-      <input type="text" id="ghRepo" placeholder="e.g. my-pages" autocorrect="off" autocapitalize="none" autocomplete="off" />
+      <input type="text" id="ghRepo" autocorrect="off" autocapitalize="none" autocomplete="off" />
     </div>
     <div class="field">
       <label>File name in repo</label>
-      <input type="text" id="ghFile" placeholder="index.html" autocorrect="off" autocapitalize="none" autocomplete="off" />
+      <input type="text" id="ghFile" autocorrect="off" autocapitalize="none" autocomplete="off" />
     </div>
   </div>
   <div class="modal-footer">
@@ -748,10 +682,11 @@
 <script>
   const STORAGE_KEY  = 'mypages_bookmarks';
   const CAT_KEY      = 'mypages_categories';
+  const GH_KEY       = 'mypages_gh';
   let activeCategory = 'all';
   let panelOpen      = false;
 
-  /* ── Built-in links (always present on every device) ── */
+  /* ── Built-in links ── */
   const BUILTIN_BOOKMARKS = [
     {"id":1774150192233,"name":"Claude","url":"https://claude.ai/chat","category":"llm","added":"2026-03-22T03:29:52.233Z"},
     {"id":1774150132283,"name":"Redfin","url":"https://www.redfin.com/rentals/rental-listing-dashboard","category":"rentals","added":"2026-03-22T03:28:52.283Z"},
@@ -777,8 +712,7 @@
   ];
 
   const BUILTIN_CATS = ['rentals','learning','llm','investment','airline','e-mail'];
-
-  const BUILTIN_IDS = new Set(BUILTIN_BOOKMARKS.map(b => b.id));
+  const BUILTIN_IDS  = new Set(BUILTIN_BOOKMARKS.map(b => b.id));
 
   const catColors = {
     rentals:    '#60c8f0',
@@ -794,32 +728,24 @@
     '#60f0c0','#f060c0','#f09060','#9060f0','#f06090','#90f060'
   ];
 
-  /* ── Storage ── 
-     Built-ins are always shown. localStorage holds user-added links only.
-     Merged view = built-ins first, then user-added on top.
-  ── */
+  /* ── Storage ── */
   function loadUserBookmarks() {
     try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
     catch { return []; }
   }
 
   function saveBookmarks(data) {
-    // Only save non-builtin entries to localStorage
-    const userOnly = data.filter(b => !BUILTIN_IDS.has(b.id));
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(userOnly));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data.filter(b => !BUILTIN_IDS.has(b.id))));
   }
 
   function loadBookmarks() {
-    const user = loadUserBookmarks();
-    // User-added links first (newest on top), then built-ins
-    return [...user, ...BUILTIN_BOOKMARKS];
+    return [...loadUserBookmarks(), ...BUILTIN_BOOKMARKS];
   }
 
   function loadCategories() {
     try {
       const stored = JSON.parse(localStorage.getItem(CAT_KEY));
       if (Array.isArray(stored)) {
-        // Merge: built-in cats + any user-added cats, no duplicates
         const merged = [...BUILTIN_CATS];
         stored.forEach(c => { if (!merged.includes(c)) merged.push(c); });
         return merged;
@@ -829,9 +755,7 @@
   }
 
   function saveCategories(cats) {
-    // Only persist categories that aren't already built-in
-    const userCats = cats.filter(c => !BUILTIN_CATS.includes(c));
-    localStorage.setItem(CAT_KEY, JSON.stringify(userCats));
+    localStorage.setItem(CAT_KEY, JSON.stringify(cats.filter(c => !BUILTIN_CATS.includes(c))));
   }
 
   function getCatColor(cat) {
@@ -846,10 +770,10 @@
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2400);
+    setTimeout(() => t.classList.remove('show'), 2800);
   }
 
-  /* ── Panel toggle ── */
+  /* ── Panel ── */
   function togglePanel() {
     panelOpen = !panelOpen;
     document.getElementById('panelWrap').classList.toggle('open', panelOpen);
@@ -911,34 +835,29 @@
     const name = document.getElementById('inputName').value.trim();
     const url  = document.getElementById('inputUrl').value.trim();
     const cat  = document.getElementById('inputCategory').value;
-
     if (!name || !url) { showToast('Please fill in name & URL.'); return; }
-
     let finalUrl = url;
     if (!/^https?:\/\//i.test(finalUrl)) finalUrl = 'https://' + finalUrl;
-
-    const data = loadBookmarks();
+    const data = loadUserBookmarks();
     data.unshift({ id: Date.now(), name, url: finalUrl, category: cat, added: new Date().toISOString() });
     saveBookmarks(data);
-
     document.getElementById('inputName').value = '';
     document.getElementById('inputUrl').value  = '';
-
-    if (panelOpen) togglePanel(); // auto-close form after adding
+    if (panelOpen) togglePanel();
     showToast('✓ Page added!');
     renderAll();
   }
 
   function deleteBookmark(id) {
-    if (BUILTIN_IDS.has(id)) { showToast('Built-in links can\'t be deleted here — edit the HTML file to remove them.'); return; }
+    if (BUILTIN_IDS.has(id)) { showToast('Edit the HTML file on GitHub to remove built-in links.'); return; }
     saveBookmarks(loadBookmarks().filter(b => b.id !== id));
     showToast('Page removed.');
     renderAll();
   }
 
   function updateCategory(id, newCat) {
-    const data = loadBookmarks().map(b => b.id === id ? { ...b, category: newCat } : b);
-    saveBookmarks(data);
+    const all = loadBookmarks().map(b => b.id === id ? { ...b, category: newCat } : b);
+    saveBookmarks(all);
     showToast(`✓ Moved to "${newCat}".`);
     renderAll();
   }
@@ -1002,6 +921,13 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  function renderAll() {
+    renderTabs();
+    renderBookmarks();
+    renderCatDropdown();
+    renderCatPills();
+  }
+
   /* ── Modal router ── */
   function openModal(mode) {
     if (mode === 'github-settings') { openGhModal(); return; }
@@ -1016,8 +942,6 @@
   }
 
   /* ── GitHub Settings ── */
-  const GH_KEY = 'mypages_gh';
-
   function loadGhSettings() {
     try { return JSON.parse(localStorage.getItem(GH_KEY)) || {}; }
     catch { return {}; }
@@ -1026,8 +950,8 @@
   function openGhModal() {
     const cfg = loadGhSettings();
     document.getElementById('ghToken').value = cfg.token || '';
-    document.getElementById('ghUser').value  = cfg.user  || 'ibnkali';
-    document.getElementById('ghRepo').value  = cfg.repo  || 'my-pages';
+    document.getElementById('ghUser').value  = cfg.user  || 'ibnkalillc-tech';
+    document.getElementById('ghRepo').value  = cfg.repo  || 'My-Pages';
     document.getElementById('ghFile').value  = cfg.file  || 'index.html';
     document.getElementById('ghBackdrop').classList.add('open');
     document.getElementById('ghModal').classList.add('open');
@@ -1051,32 +975,30 @@
     showToast('✓ GitHub settings saved!');
   }
 
-  /* ── Publish to GitHub ── */
+  /* ── Publish to GitHub via Vercel serverless function ── */
   async function publishToGitHub(cfg) {
     const btn = document.getElementById('publishBtn');
     btn.textContent = '⏳ Publishing…';
     btn.disabled = true;
 
     try {
+      // 1. Get current file SHA from GitHub
       const apiBase = `https://api.github.com/repos/${cfg.user}/${cfg.repo}/contents/${cfg.file}`;
-      const headers = {
+      const ghHeaders = {
         'Authorization': `token ${cfg.token}`,
         'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json',
       };
 
-      // 1. Get current file SHA directly from GitHub (read-only, no CORS issue)
-      const getRes = await fetch(apiBase, { headers });
-      if (!getRes.ok) throw new Error(`Could not read file: ${getRes.status}`);
-      const getJson = await getRes.json();
-      const sha = getJson.sha;
+      const getRes = await fetch(apiBase, { headers: ghHeaders });
+      if (!getRes.ok) throw new Error(`Could not read file (${getRes.status}) — check username, repo and file name in ⚙ GitHub settings.`);
+      const { sha } = await getRes.json();
 
-      // 2. Build updated HTML with current bookmarks baked in
+      // 2. Build updated HTML
       const updatedHtml = buildUpdatedHtml(loadBookmarks(), loadCategories());
       const content = btoa(unescape(encodeURIComponent(updatedHtml)));
 
-      // 3. Push via our Vercel serverless function (avoids CORS on PUT)
-      const vercelApi = `https://${cfg.repo}.vercel.app/api/publish`;
+      // 3. Push via Vercel serverless function (avoids CORS on PUT)
+      const vercelApi = `https://${cfg.repo.toLowerCase()}.vercel.app/api/publish`;
       const putRes = await fetch(vercelApi, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1085,7 +1007,7 @@
 
       if (!putRes.ok) {
         const err = await putRes.json().catch(() => ({}));
-        throw new Error(err.message || `Server error: ${putRes.status}`);
+        throw new Error(err.message || `Server error ${putRes.status}`);
       }
 
       showToast('✓ Published! Vercel will update in ~30 seconds.');
@@ -1098,38 +1020,19 @@
   }
 
   function buildUpdatedHtml(bookmarks, categories) {
-    // Get the current page HTML and replace the BUILTIN_BOOKMARKS and BUILTIN_CATS arrays
     const html = document.documentElement.outerHTML;
-
     const newBookmarks = JSON.stringify(bookmarks, null, 4)
-      .split('\n').map((l, i) => i === 0 ? l : '  ' + l).join('\n');
-
+      .split('\n').map((l, i) => i === 0 ? l : '    ' + l).join('\n');
     const newCats = JSON.stringify(categories);
-
-    const updated = html
-      .replace(
-        /const BUILTIN_BOOKMARKS = \[[\s\S]*?\];/,
-        `const BUILTIN_BOOKMARKS = ${newBookmarks};`
-      )
-      .replace(
-        /const BUILTIN_CATS = \[.*?\];/,
-        `const BUILTIN_CATS = ${newCats};`
-      );
-
-    return '<!DOCTYPE html>\n' + updated;
-  }
-
-  function renderAll() {
-    renderTabs();
-    renderBookmarks();
-    renderCatDropdown();
-    renderCatPills();
+    return '<!DOCTYPE html>\n' + html
+      .replace(/const BUILTIN_BOOKMARKS = \[[\s\S]*?\];/, `const BUILTIN_BOOKMARKS = ${newBookmarks};`)
+      .replace(/const BUILTIN_CATS = \[.*?\];/, `const BUILTIN_CATS = ${newCats};`);
   }
 
   // Enter key shortcuts
-  document.getElementById('inputName').addEventListener('keydown',    e => { if (e.key === 'Enter') addBookmark(); });
-  document.getElementById('inputUrl').addEventListener('keydown',     e => { if (e.key === 'Enter') addBookmark(); });
-  document.getElementById('newCatInput').addEventListener('keydown',  e => { if (e.key === 'Enter') addCategory(); });
+  document.getElementById('inputName').addEventListener('keydown',   e => { if (e.key === 'Enter') addBookmark(); });
+  document.getElementById('inputUrl').addEventListener('keydown',    e => { if (e.key === 'Enter') addBookmark(); });
+  document.getElementById('newCatInput').addEventListener('keydown', e => { if (e.key === 'Enter') addCategory(); });
 
   renderAll();
 </script>
