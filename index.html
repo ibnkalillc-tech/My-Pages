@@ -998,7 +998,7 @@
       const content = btoa(unescape(encodeURIComponent(updatedHtml)));
 
       // 3. Push via Vercel serverless function (avoids CORS on PUT)
-      const vercelApi = `https://${cfg.repo.toLowerCase()}.vercel.app/api/publish`;
+      const vercelApi = `https://my-pages-rosy.vercel.app/api/publish`;
       const putRes = await fetch(vercelApi, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
